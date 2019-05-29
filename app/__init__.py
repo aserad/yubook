@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
 from app.app import Flask
+# from flask import Flask
 
 
 def register_blueprints(my_app):

@@ -6,9 +6,9 @@ from flask import Flask as _Flask
 from flask.json import JSONEncoder as _JSONEncoder
 
 from app.libs.err_code import ServerError
-from app.models.base import db
 
 
+# 使用jsonify做序列化时用到的
 class JSONEncoder(_JSONEncoder):
     def default(self, o):
         if hasattr(o, 'keys') and hasattr(o, '__getitem__'):

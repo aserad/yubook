@@ -3,7 +3,7 @@ from app.libs.err import APIException
 
 
 class Success(APIException):
-    code = 201
+    code = 200
     msg = 'OK'
     error_code = 0
 
@@ -42,6 +42,12 @@ class NotFound(APIException):
     code = 404
     msg = 'not found'
     error_code = 1004
+
+
+class DuplicateGift(APIException):
+    code = 400
+    msg = 'this book is already in gift list or wish list'
+    error_code = 1009
 
 
 

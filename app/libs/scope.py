@@ -23,6 +23,7 @@ class BaseScope:
 class UserScope(BaseScope):
     # allow_api = ['v1.user+get_user', 'v1.user+delete_user']
     forbidden = ['v1.user+super_get_user', 'v1.user+super_delete_user']
+    allow_module = ['v1.gift']
 
     def __init__(self):
         self + AdminScope()
@@ -30,7 +31,7 @@ class UserScope(BaseScope):
 
 class AdminScope(BaseScope):
     # allow_api = ['v1.user+super_get_user', 'v1.user+super_delete_user']
-    allow_module = ['v1.user']
+    allow_module = ['v1.user', 'v1.gift']
 
     def __init__(self):
         pass

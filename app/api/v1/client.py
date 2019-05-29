@@ -20,7 +20,7 @@ def create_client():
         ClientTypeEnum.USER_EMAIL: __register_user_by_email,
     }
     promise[form.type.data]()
-    return Success()
+    return Success(code=201)
 
 
 def __register_user_by_email():

@@ -2,6 +2,7 @@
 from flask import Blueprint, jsonify
 from sqlalchemy import or_, and_
 
+from app.libs.err_code import Success
 from app.libs.redprint import Redprint
 from app.models.book import Book
 from app.validators.forms import BookSearchForm
@@ -18,6 +19,7 @@ def search_book():
         or_(Book.title.like(q), Book.author.like(q), Book.publisher.like(q)),
         Book.status == 0
     )).all()
+    books = [book.hide('summary') for book in books]
     return jsonify(books)
 
 

@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, orm
 
 from app.models.base import Base
 
@@ -17,5 +17,8 @@ class Book(Base):
     summary = Column(String(1000))
     image = Column(String(50))
 
-    def keys(self):
-        return ['title', 'author', 'binding', 'publisher', 'price', 'pages', 'pubdate', 'isbn']
+    @orm.reconstructor
+    def __init__(self):
+        self.fields = ['id', 'title', 'author', 'binding', 'publisher', 'price',
+                       'pages', 'pubdate', 'isbn', 'summary', 'image']
+

@@ -68,3 +68,18 @@ class Base(db.Model):
 
     def __getitem__(self, item):   # 为了能够通过 o['name']的方式访问对象的属性而添加的方法
         return getattr(self, item)
+
+    def keys(self):
+        return self.fields
+
+    def hide(self, *args):
+        for field in args:
+            if field in self.fields:
+                self.fields.remove(field)
+        return self
+
+    def append(self, *args):
+        for field in args:
+            if field not in self.fields:
+                self.fields.append(field)
+        return self

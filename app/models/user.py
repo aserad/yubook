@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 
-from sqlalchemy import Column, Integer, String, SmallInteger
+from sqlalchemy import Column, Integer, String, SmallInteger, orm
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from app.libs.err_code import NotFound, AuthFailed
@@ -14,8 +14,12 @@ class User(Base):
     auth = Column(SmallInteger, default=1)   # 权限标识，1为普通用户，2为管理员
     _password = Column('password', String(128))
 
-    def keys(self):   # 在通过dict(user)将对象转换为字典时会调用该方法返回生成的字典的所有键
-        return ['id', 'email', 'nickname', 'auth']
+    # def keys(self):   # 在通过dict(user)将对象转换为字典时会调用该方法返回生成的字典的所有键
+    #     return ['id', 'email', 'nickname', 'auth']
+
+    @orm.reconstructor
+    def __init__(self):
+        self.fields = ['id', 'email', 'nickname', 'auth']
 
     @property
     def password(self):
